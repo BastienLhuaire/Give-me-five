@@ -1,7 +1,3 @@
-var path         = require('path');
-var SRC          = path.join(__dirname, 'src/');
-var NODE_MODULES = path.join(__dirname, 'node_modules/');
-
 module.exports = {
   entry: "./src/app.js",
   output: {
@@ -22,7 +18,6 @@ module.exports = {
    ]
  },
  resolve: {
- 	root: [SRC, NODE_MODULES],
    	extensions: ['', '.js']
  }
 }

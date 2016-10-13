@@ -5,7 +5,8 @@
   "main": "webpack.config.js",
   "scripts": {
     "watch": "webpack --watch",
-    "server": "live-server dist/"
+    "server": "live-server dist/",
+    "dev": "start npm run watch && start npm run server"
   },
   "author": "@rdad",
   "license": "ISC",
