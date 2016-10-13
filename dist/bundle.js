@@ -34,7 +34,7 @@
 /******/ 	__webpack_require__.c = installedModules;
 
 /******/ 	// __webpack_public_path__
-/******/ 	__webpack_require__.p = "";
+/******/ 	__webpack_require__.p = "/dist/";
 
 /******/ 	// Load entry module and return exports
 /******/ 	return __webpack_require__(0);
@@ -42,10 +42,33 @@
 /************************************************************************/
 /******/ ([
 /* 0 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _logger = __webpack_require__(1);
+
+	var _logger2 = _interopRequireDefault(_logger);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	document.write('Welcome to my APPLICATION  !!!');
+	(0, _logger2.default)();
+	console.log('app loaded');
+
+/***/ },
+/* 1 */
 /***/ function(module, exports) {
 
-	document.write('welcome to my app');
-	console.log('app loaded');
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	exports.default = function () {
+		console.log('logger.js is running!!');
+	};
 
 /***/ }
 /******/ ]);
