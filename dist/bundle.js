@@ -34,7 +34,7 @@
 /******/ 	__webpack_require__.c = installedModules;
 
 /******/ 	// __webpack_public_path__
-/******/ 	__webpack_require__.p = "/dist/";
+/******/ 	__webpack_require__.p = "./dist/";
 
 /******/ 	// Load entry module and return exports
 /******/ 	return __webpack_require__(0);
@@ -53,7 +53,7 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	document.write('Welcome to my application.');
-	(0, _logger2.default)();
+	(0, _logger2.default)(); // yes
 	console.log('app loaded');
 
 /***/ },
@@ -67,7 +67,7 @@
 	});
 
 	exports.default = function () {
-		console.log('logger.js is running!!');
+		console.log('logger.js is RUNNING!!');
 	};
 
 /***/ }
