@@ -1,0 +1,27 @@
+.titre{
+	text-align: center;
+}
+.block_div{
+	background-color: rgba(33,32,34,0.4);
+	height: 300px;
+	border-radius:10px;
+	padding: 10px;
+}
+body{
+	background-image: url("../images/motif.png");
+	background-size: 50%;
+}
+span{
+	border: 1px solid black;
+}
+p{
+	display: inline;
+}
+ul{
+	list-style: none;
+}
+li{
+	margin-bottom: 5px;
+	padding: 2px;
+	background-color: rgba(107,107,107,1);
+}

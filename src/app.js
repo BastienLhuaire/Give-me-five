@@ -1,5 +1,6 @@
 import logger from './logger';
+var moment = require('moment');
+console.log(moment().format("dddd, MMMM Do YYYY, h:mm:ss a"))
 
-document.write('Welcome to my application.');
 logger(); // yes
 console.log('app loaded');
