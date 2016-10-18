@@ -2,6 +2,7 @@ let student_list = {
 
 	students: [],
 	student_selected: null,
+	li_student:$('#students').children('li').detach(),
 
 	select_student:  function( student ){
 
@@ -19,8 +20,7 @@ let student_list = {
 		this.students = students;
 		//  création de la représentation de la liste
 		
-		let $students = $('#students'),
-			$one 	= $students.children('li').detach();
+		let $one = this.li_student;
 
 		for(let j=0; j<students.length; j++){
 
@@ -30,14 +30,10 @@ let student_list = {
 
 			li.attr('title', student.firstname);
 			li.attr('id',j);
-			$students.append(li);
+			$("#students").append(li);
+			//changement du nom
 			$("#"+j+" .nom").append(student.firstname+" "+student.lastname);
-			$("#"+j).removeClass('selected_student');
 		}
-
-		// eleve par defaut
-		
-		this.select_student(this.students[0]);
 
 		// gestion des click
 		
@@ -52,6 +48,15 @@ let student_list = {
 
 
 		console.log('Liste : students ready');
+	},
+	add_student: function(student){
+		this.students.push(student);
+		let $new_student = this.li_student,
+			new_id		 = this.students.length-1;
+		$new_student.attr("id",new_id);
+		$new_student.attr('title', student.firstname);
+		$("#students").append($new_student);
+		$("#"+new_id+" .nom").append(student.firstname+" "+student.lastname);
 	}
 };
 

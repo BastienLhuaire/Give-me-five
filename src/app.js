@@ -10,9 +10,9 @@ var give_me_five = {
 
 		// ajout des élèves a l'appli
 		let students = [
-			new Student('Bastien', "Lhuaire", 19, "M"),
+			new Student('Bastien', "Lhuaire", 19, "M","images/bastien.jpg"),
 			new Student('Stan','Xiong', 17, "M"),
-			new Student('Joel','Alves', 22, "M"),
+			new Student('Joel','Alves', 22, "M","images/joel.jpg"),
 			new Student('Clement', "Teboul", 19, "M"),
 		];
 
@@ -21,5 +21,7 @@ var give_me_five = {
 	}
 
 };
-
+$(".add_student").on("click",function(){
+	student_list.add_student(new Student('Bastien', "Lhuaire", 19, "M"));
+});
 give_me_five.init()

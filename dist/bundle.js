@@ -63,14 +63,16 @@
 		init: function init() {
 
 			// ajout des élèves a l'appli
-			var students = [new _student2.default('Bastien', "Lhuaire", 19, "M"), new _student2.default('Stan', 'Xiong', 17, "M"), new _student2.default('Joel', 'Alves', 22, "M"), new _student2.default('Clement', "Teboul", 19, "M")];
+			var students = [new _student2.default('Bastien', "Lhuaire", 19, "M", "images/bastien.jpg"), new _student2.default('Stan', 'Xiong', 17, "M"), new _student2.default('Joel', 'Alves', 22, "M", "images/joel.jpg"), new _student2.default('Clement', "Teboul", 19, "M")];
 
 			_student_list.student_list.init(students, _student_display.student_display);
 			console.log("Give me Five is initiated and  ready");
 		}
 
 	};
-
+	$(".add_student").on("click", function () {
+		_student_list.student_list.add_student(new _student2.default('Bastien', "Lhuaire", 19, "M"));
+	});
 	give_me_five.init();
 
 /***/ },
@@ -93,19 +95,19 @@
 	 * @param  {[type]}           [description]
 	 * @return {[type]}           [description]
 	 */
-	function Student(firstname, lastname, age, sexe) {
+	function Student(firstname, lastname, age, sexe, photo_url) {
 		_classCallCheck(this, Student);
 
 		this.firstname = firstname || Jhon;
 		this.lastname = lastname || Smith;
 		this.age = age || 0;
 		this.sexe = sexe || "indeterminer";
+		this.photo_url = photo_url || "images/profile_default.png";
 		this.score = 0;
 		this.present_number = 0;
 		this.absent_number = 0;
 		this.retard_number = 0;
 		this.participation = 0;
-		this.photo = "images/profile_default";
 	};
 
 	exports.default = Student;
@@ -123,6 +125,7 @@
 
 		students: [],
 		student_selected: null,
+		li_student: $('#students').children('li').detach(),
 
 		select_student: function select_student(student) {
 
@@ -138,8 +141,7 @@
 			this.students = students;
 			//  création de la représentation de la liste
 
-			var $students = $('#students'),
-			    $one = $students.children('li').detach();
+			var $one = this.li_student;
 
 			for (var j = 0; j < students.length; j++) {
 
@@ -149,14 +151,10 @@
 
 				li.attr('title', student.firstname);
 				li.attr('id', j);
-				$students.append(li);
+				$("#students").append(li);
+				//changement du nom
 				$("#" + j + " .nom").append(student.firstname + " " + student.lastname);
-				$("#" + j).removeClass('selected_student');
 			}
-
-			// eleve par defaut
-
-			this.select_student(this.students[0]);
 
 			// gestion des click
 
@@ -170,6 +168,15 @@
 			});
 
 			console.log('Liste : students ready');
+		},
+		add_student: function add_student(student) {
+			this.students.push(student);
+			var $new_student = this.li_student,
+			    new_id = this.students.length - 1;
+			$new_student.attr("id", new_id);
+			$new_student.attr('title', student.firstname);
+			$("#students").append($new_student);
+			$("#" + new_id + " .nom").append(student.firstname + " " + student.lastname);
 		}
 	};
 
@@ -190,19 +197,21 @@
 
 	var student_display = {
 
+		div_display: $('#partie_display').children().detach(),
+
 		draw: function draw() {
-
 			var student = _student_list.student_list.get_selected(),
-			    $display = $('#partie_display'),
-			    $one = $display.children().detach();
+			    $display = $("#partie_display");
+			$display.empty();
 			if (student != null) {
-
 				//  création de la représentation de la partie affichage
-				var div = $one.clone();
-				$display.append(div);
+				var div = this.div_display.clone();
+				$('#partie_display').append(div);
 				$("#partie_display .nom_titre").empty();
 				$("#partie_display .nom_titre").append(student.firstname + " " + student.lastname);
-			};
+				//changement de l'image
+				$(".image_profile").attr("src", student.photo_url);
+			}
 			// gestion des click
 			/*	
 	  	let self = this;
