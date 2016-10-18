@@ -15,10 +15,8 @@ let student_list = {
 		return this.student_selected;
 	},
 
-	init: function( students ){
-
+	init: function( students , display_student){
 		this.students = students;
-
 		//  création de la représentation de la liste
 		
 		let $students = $('#students'),
@@ -28,13 +26,13 @@ let student_list = {
 
 			let li 		= $one.clone(),
 			    student 	= this.students[j];
-
 			student.id 	= j;
 
 			li.attr('title', student.firstname);
 			li.attr('id',j);
 			$students.append(li);
 			$("#"+j+" .nom").append(student.firstname+" "+student.lastname);
+			$("#"+j).removeClass('selected_student');
 		}
 
 		// eleve par defaut
@@ -48,7 +46,8 @@ let student_list = {
 		$('#students').on('click', 'li', function(){
 
 			let index = $( "#students li" ).index( this );
-			self.select_student(self.students[index]);		
+			self.select_student(self.students[index]);	
+			display_student.draw();
 		});
 
 

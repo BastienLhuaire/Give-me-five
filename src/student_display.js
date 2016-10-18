@@ -2,7 +2,7 @@ import {student_list} from './student_list';
 
 let student_display = {
 
-	draw: function( ){
+	draw: function(){
 
 		let student = student_list.get_selected(),
 		    $display = $('#partie_display'),
@@ -13,7 +13,6 @@ let student_display = {
 		let div 		= $one.clone();
 		$display.append(div);
 		$("#partie_display .nom_titre").empty();
-		console.log(student)
 		$("#partie_display .nom_titre").append(student.firstname+" "+student.lastname);
 	};
 		// gestion des click
@@ -27,5 +26,4 @@ let student_display = {
 		});*/
 	}
 };
-
 export {student_display};

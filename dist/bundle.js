@@ -57,7 +57,7 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var moment = __webpack_require__(4);
-	console.log(moment().format("dddd, MMMM Do"));
+
 	var give_me_five = {
 
 		init: function init() {
@@ -65,13 +65,12 @@
 			// ajout des élèves a l'appli
 			var students = [new _student2.default('Bastien', "Lhuaire", 19, "M"), new _student2.default('Stan', 'Xiong', 17, "M"), new _student2.default('Joel', 'Alves', 22, "M"), new _student2.default('Clement', "Teboul", 19, "M")];
 
-			_student_list.student_list.init(students);
-
+			_student_list.student_list.init(students, _student_display.student_display);
 			console.log("Give me Five is initiated and  ready");
 		}
 
 	};
-	_student_display.student_display.draw();
+
 	give_me_five.init();
 
 /***/ },
@@ -135,10 +134,8 @@
 			return this.student_selected;
 		},
 
-		init: function init(students) {
-
+		init: function init(students, display_student) {
 			this.students = students;
-
 			//  création de la représentation de la liste
 
 			var $students = $('#students'),
@@ -148,13 +145,13 @@
 
 				var li = $one.clone(),
 				    student = this.students[j];
-
 				student.id = j;
 
 				li.attr('title', student.firstname);
 				li.attr('id', j);
 				$students.append(li);
 				$("#" + j + " .nom").append(student.firstname + " " + student.lastname);
+				$("#" + j).removeClass('selected_student');
 			}
 
 			// eleve par defaut
@@ -169,6 +166,7 @@
 
 				var index = $("#students li").index(this);
 				self.select_student(self.students[index]);
+				display_student.draw();
 			});
 
 			console.log('Liste : students ready');
@@ -203,7 +201,6 @@
 				var div = $one.clone();
 				$display.append(div);
 				$("#partie_display .nom_titre").empty();
-				console.log(student);
 				$("#partie_display .nom_titre").append(student.firstname + " " + student.lastname);
 			};
 			// gestion des click
@@ -217,7 +214,6 @@
 	  	});*/
 		}
 	};
-
 	exports.student_display = student_display;
 
 /***/ },
