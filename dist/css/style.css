@@ -1,6 +1,7 @@
 .block_div{
 	background-color: rgba(33,32,34,0.4);
-	height: 300px;
+	height: 450px;
+	max-height: 1000px;
 	border-radius:10px;
 	padding: 10px;
 	overflow: auto;
@@ -20,4 +21,16 @@ li{
 }
 .selected_student{
 	background-color: #160F45;
+}
+.nom_titre{
+	margin: 0;
+}
+.partie_photo{
+	padding: 10px;
+}
+.barre_score{
+	border: 1px #ddd solid;
+	border-radius: 40px;
+	margin-top: 10px;
+	margin-bottom: 10px;
 }
