@@ -2,8 +2,8 @@ import Student from './student.class';
 import {student_list} from './student_list';
 import {student_display} from './student_display';
 
-var moment = require('moment');
-var give_me_five = {
+let moment = require('moment');
+let give_me_five = {
 
 	init: function(){
 
@@ -16,11 +16,20 @@ var give_me_five = {
 		];
 
 		student_list.init(students,student_display);
+		popup_add_student(student_list,Student);
 		console.log("Give me Five is initiated and  ready");
 	}
 
 };
-$(".add_student").on("click",function(){
-	student_list.add_student(new Student(),student_display);
-});
-give_me_five.init()
+function popup_add_student(){
+	$( "#form_add" ).on("submit",function( event ) {
+		event.preventDefault();
+		let firstname = $( "input#firstname" ).val(),
+		    lastname = $( "input#lastname" ).val(),
+		    photo = "images/";
+		photo+=$("input#photo").val();
+	  	student_list.add_student(new Student(firstname,lastname,18,"M",photo),student_display);
+	  	$("#popup_add_student").modal('hide');
+	});
+}
+give_me_five.init();

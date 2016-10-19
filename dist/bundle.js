@@ -65,13 +65,22 @@
 			var students = [new _student2.default('Bastien', "Lhuaire", 19, "M", "images/bastien.jpg"), new _student2.default('Stan', 'Xiong', 17, "M"), new _student2.default('Joel', 'Alves', 22, "M", "images/joel.jpg"), new _student2.default('Clement', "Teboul", 19, "M")];
 
 			_student_list.student_list.init(students, _student_display.student_display);
+			popup_add_student(_student_list.student_list, _student2.default);
 			console.log("Give me Five is initiated and  ready");
 		}
 
 	};
-	$(".add_student").on("click", function () {
-		_student_list.student_list.add_student(new _student2.default(), _student_display.student_display);
-	});
+	function popup_add_student() {
+		$("#form_add").on("submit", function (event) {
+			event.preventDefault();
+			var firstname = $("input#firstname").val(),
+			    lastname = $("input#lastname").val(),
+			    photo = "images/";
+			photo += $("input#photo").val();
+			_student_list.student_list.add_student(new _student2.default(firstname, lastname, 18, "M", photo), _student_display.student_display);
+			$("#popup_add_student").modal('hide');
+		});
+	}
 	give_me_five.init();
 
 /***/ },
@@ -175,7 +184,6 @@
 		add_student: function add_student(student, display_student) {
 			this.students.push(student);
 			this.init(this.students, display_student);
-			console.log(this.students);
 		}
 	};
 
