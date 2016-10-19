@@ -1,13 +1,17 @@
+function tri(a,b)
+{
+return (a.lastname > b.lastname)?1:-1;
+}
 let student_list = {
 
 	students: [],
 	student_selected: null,
-	li_student:$('#students').children('li').detach(),
+	li_student:$('#students_ul').children('li').detach(),
 
 	select_student:  function( student ){
 
 		this.student_selected = student;
-		$('#students li').removeClass('selected_student')
+		$('#students_ul li').removeClass('selected_student')
 						.eq(student.id)
 						.addClass('selected_student');
 	},
@@ -18,19 +22,20 @@ let student_list = {
 
 	init: function( students , display_student){
 		this.students = students;
+		this.students.sort(tri);
 		//  création de la représentation de la liste
 		
 		let $one = this.li_student;
-
+		$("#students_ul").empty();
 		for(let j=0; j<students.length; j++){
 
 			let li 		= $one.clone(),
-			    student 	= this.students[j];
+			    student = this.students[j];
 			student.id 	= j;
 
 			li.attr('title', student.firstname);
 			li.attr('id',j);
-			$("#students").append(li);
+			$("#students_ul").append(li);
 			//changement du nom
 			$("#"+j+" .nom").append(student.firstname+" "+student.lastname);
 		}
@@ -39,9 +44,9 @@ let student_list = {
 		
 		let self = this;
 		
-		$('#students').on('click', 'li', function(){
+		$('#students_ul').on('click', 'li', function(){
 
-			let index = $( "#students li" ).index( this );
+			let index = $( "#students_ul li" ).index( this );
 			self.select_student(self.students[index]);	
 			display_student.draw();
 		});
@@ -49,14 +54,10 @@ let student_list = {
 
 		console.log('Liste : students ready');
 	},
-	add_student: function(student){
+	add_student: function(student,display_student){
 		this.students.push(student);
-		let $new_student = this.li_student,
-			new_id		 = this.students.length-1;
-		$new_student.attr("id",new_id);
-		$new_student.attr('title', student.firstname);
-		$("#students").append($new_student);
-		$("#"+new_id+" .nom").append(student.firstname+" "+student.lastname);
+		this.init(this.students,display_student);
+		console.log(this.students)
 	}
 };
 

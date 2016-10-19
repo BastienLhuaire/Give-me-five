@@ -57,7 +57,6 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var moment = __webpack_require__(4);
-
 	var give_me_five = {
 
 		init: function init() {
@@ -71,7 +70,7 @@
 
 	};
 	$(".add_student").on("click", function () {
-		_student_list.student_list.add_student(new _student2.default('Bastien', "Lhuaire", 19, "M"));
+		_student_list.student_list.add_student(new _student2.default(), _student_display.student_display);
 	});
 	give_me_five.init();
 
@@ -98,8 +97,8 @@
 	function Student(firstname, lastname, age, sexe, photo_url) {
 		_classCallCheck(this, Student);
 
-		this.firstname = firstname || Jhon;
-		this.lastname = lastname || Smith;
+		this.firstname = firstname || "John";
+		this.lastname = lastname || "Doe";
 		this.age = age || 0;
 		this.sexe = sexe || "indeterminer";
 		this.photo_url = photo_url || "images/profile_default.png";
@@ -107,7 +106,7 @@
 		this.present_number = 0;
 		this.absent_number = 0;
 		this.retard_number = 0;
-		this.participation = 0;
+		this.participation_number = 0;
 	};
 
 	exports.default = Student;
@@ -121,16 +120,19 @@
 	Object.defineProperty(exports, "__esModule", {
 		value: true
 	});
+	function tri(a, b) {
+		return a.lastname > b.lastname ? 1 : -1;
+	}
 	var student_list = {
 
 		students: [],
 		student_selected: null,
-		li_student: $('#students').children('li').detach(),
+		li_student: $('#students_ul').children('li').detach(),
 
 		select_student: function select_student(student) {
 
 			this.student_selected = student;
-			$('#students li').removeClass('selected_student').eq(student.id).addClass('selected_student');
+			$('#students_ul li').removeClass('selected_student').eq(student.id).addClass('selected_student');
 		},
 
 		get_selected: function get_selected() {
@@ -139,10 +141,11 @@
 
 		init: function init(students, display_student) {
 			this.students = students;
+			this.students.sort(tri);
 			//  création de la représentation de la liste
 
 			var $one = this.li_student;
-
+			$("#students_ul").empty();
 			for (var j = 0; j < students.length; j++) {
 
 				var li = $one.clone(),
@@ -151,7 +154,7 @@
 
 				li.attr('title', student.firstname);
 				li.attr('id', j);
-				$("#students").append(li);
+				$("#students_ul").append(li);
 				//changement du nom
 				$("#" + j + " .nom").append(student.firstname + " " + student.lastname);
 			}
@@ -160,23 +163,19 @@
 
 			var self = this;
 
-			$('#students').on('click', 'li', function () {
+			$('#students_ul').on('click', 'li', function () {
 
-				var index = $("#students li").index(this);
+				var index = $("#students_ul li").index(this);
 				self.select_student(self.students[index]);
 				display_student.draw();
 			});
 
 			console.log('Liste : students ready');
 		},
-		add_student: function add_student(student) {
+		add_student: function add_student(student, display_student) {
 			this.students.push(student);
-			var $new_student = this.li_student,
-			    new_id = this.students.length - 1;
-			$new_student.attr("id", new_id);
-			$new_student.attr('title', student.firstname);
-			$("#students").append($new_student);
-			$("#" + new_id + " .nom").append(student.firstname + " " + student.lastname);
+			this.init(this.students, display_student);
+			console.log(this.students);
 		}
 	};
 

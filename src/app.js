@@ -3,7 +3,6 @@ import {student_list} from './student_list';
 import {student_display} from './student_display';
 
 var moment = require('moment');
-
 var give_me_five = {
 
 	init: function(){
@@ -22,6 +21,6 @@ var give_me_five = {
 
 };
 $(".add_student").on("click",function(){
-	student_list.add_student(new Student('Bastien', "Lhuaire", 19, "M"));
+	student_list.add_student(new Student(),student_display);
 });
 give_me_five.init()
