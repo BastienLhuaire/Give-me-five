@@ -57,6 +57,9 @@ let student_list = {
 	add_student: function(student,display_student){
 		this.students.push(student);
 		this.init(this.students,display_student);
+	},
+	delet_student: function(display_student){
+		this.init(this.students,display_student);
 	}
 };
 

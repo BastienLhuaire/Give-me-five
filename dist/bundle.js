@@ -62,22 +62,33 @@
 		init: function init() {
 
 			// ajout des élèves a l'appli
-			var students = [new _student2.default('Bastien', "Lhuaire", 19, "M", "images/bastien.jpg"), new _student2.default('Stan', 'Xiong', 17, "M"), new _student2.default('Joel', 'Alves', 22, "M", "images/joel.jpg"), new _student2.default('Clement', "Teboul", 19, "M")];
+			var students = [new _student2.default('Bastien', "Lhuaire", 19, "images/bastien.jpg"), new _student2.default('Stan', 'Xiong', 17), new _student2.default('Joel', 'Alves', 22, "images/joel.jpg"), new _student2.default('Clement', "Teboul", 19)];
 
 			_student_list.student_list.init(students, _student_display.student_display);
-			popup_add_student(_student_list.student_list, _student2.default);
+			popup_add_student();
+			popup_del_student();
 			console.log("Give me Five is initiated and  ready");
 		}
 
 	};
+	function popup_del_student() {
+		$("#popup_delete .confirm_del").on("click", function () {
+			var id = _student_list.student_list.student_selected.id;
+			_student_list.student_list.students.splice(id, 1);
+			_student_list.student_list.delet_student(_student_display.student_display);
+			$("#popup_delete").modal('hide');
+			$('#partie_display').empty();
+		});
+	}
 	function popup_add_student() {
 		$("#form_add").on("submit", function (event) {
 			event.preventDefault();
 			var firstname = $("input#firstname").val(),
 			    lastname = $("input#lastname").val(),
+			    age = $("input#age").val(),
 			    photo = "images/";
 			photo += $("input#photo").val();
-			_student_list.student_list.add_student(new _student2.default(firstname, lastname, 18, "M", photo), _student_display.student_display);
+			_student_list.student_list.add_student(new _student2.default(firstname, lastname, age, photo), _student_display.student_display);
 			$("#popup_add_student").modal('hide');
 		});
 	}
@@ -103,13 +114,12 @@
 	 * @param  {[type]}           [description]
 	 * @return {[type]}           [description]
 	 */
-	function Student(firstname, lastname, age, sexe, photo_url) {
+	function Student(firstname, lastname, age, photo_url) {
 		_classCallCheck(this, Student);
 
 		this.firstname = firstname || "John";
 		this.lastname = lastname || "Doe";
 		this.age = age || 0;
-		this.sexe = sexe || "indeterminer";
 		this.photo_url = photo_url || "images/profile_default.png";
 		this.score = 0;
 		this.present_number = 0;
@@ -183,6 +193,9 @@
 		},
 		add_student: function add_student(student, display_student) {
 			this.students.push(student);
+			this.init(this.students, display_student);
+		},
+		delet_student: function delet_student(display_student) {
 			this.init(this.students, display_student);
 		}
 	};

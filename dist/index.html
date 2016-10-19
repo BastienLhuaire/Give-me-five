@@ -26,53 +26,64 @@
 									<p class="nom"></p>
 								</div>
 								<div class="col-md-4">
-									<button class="btn btn-success btn-sm">P</button>
-									<button class="btn btn-warning btn-sm">R</button>
-									<button class="btn btn-danger btn-sm">A</button>
+									<div class="btn-group" role="group">
+										<button class="btn btn-success">P</button>
+										<button class="btn btn-warning">R</button>
+										<button class="btn btn-danger">A</button>
+									</div>
 								</div>
 								<div class="col-md-2">
 									<p class="score">Score:0</p>
 								</div>
 								<div class="col-md-2">
-									<button type="button" class="del_student close" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+									<button type="button" class="btn-danger del_student"  data-toggle="modal" data-target="#popup_delete">X</button>
+
 								</div>
 							</div>
-						</li>
+						</li>	
 					</ul>	
-					<button class="btn btn-sm add_student" data-toggle="modal" data-target="#popup_add_student">ajouter</button>	
+					<!-- Popup del student -->
+						<div id="popup_delete" class="modal fade" role="dialog">
+						  	<div class="modal-dialog  btn-group-lg">
+						    <!-- popup content-->
+						    	<div class="modal-content modal-sm">
+						      		<div class="modal-header bg-danger">
+						        		<button type="button" class="close" data-dismiss="modal">&times;</button>
+						        		<h4 class="modal-title">Voulez-vous vraiement supprimer cet élève ?!</h4>
+						     		</div>
+						        	<div class="modal-body">
+						        		<button type="button" class="btn btn-danger confirm_del">Confirmer</button>
+						        		<button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+						      		</div>
+						    	</div>
+						    	<!-- Fin popup content-->
+						  	</div>
+						</div>
+					<!-- Fin de la Popup -->
+
+					<button class="btn btn-default add_student" data-toggle="modal" data-target="#popup_add_student">ajouter</button>	
 					<!-- Popup add student -->
 					<div id="popup_add_student" class="modal fade" role="dialog">
 					  	<div class="modal-dialog">
 					    <!-- popup content-->
 					    	<div class="modal-content popup">
-					      		<div class="modal-header">
+					      		<div class="modal-header bg-info">
 					        		<button type="button" class="close" data-dismiss="modal">&times;</button>
 					        		<h4 class="modal-title">Qui sera le nouvelle élève ?</h4>
 					     		</div>
 					        	<div class="modal-body">
 					        		<form class="form-horizontal" role="form" id="form_add">
-									    <label for="firstname">Prénom</label>
+									    <label for="firstname">Prénom :</label>
 									    <input type="text" class="form-control" id="firstname" placeholder="John" name="firstname">
-									    <label for="lastname">Nom</label>
+									    <label for="lastname">Nom :</label>
 									    <input type="text" class="form-control" id="lastname" placeholder="Doe" name="lastname">
+									    <label for="age">Age :</label>
+									    <input type="number" min="10" max="100" val="10" class="form-control" id="age" name="age">
 									    <label for="photo">Photo de l'élève</label>
 										<input type="file" id="photo">
-			                			<div class="checkbox">
-    										<div class="radio-inline">
-											  <label>
-											    <input type="radio" name="option_h" id="male" value="M" checked="true">
-											    Homme
-											  </label>
-											</div>
-											<div class="radio-inline">
-											  <label>
-											    <input type="radio" name="option_f" id="female" value="F">
-											    Femme
-											  </label>
-											</div>
-  										</div>
+			                			
   										<div class="modal-footer">
-					        				<button type="submit" class="btn btn-default">Envoyer</button>
+					        				<button type="submit" class="btn btn-default">Envoyer</button >
 					     				</div>
 			                		</form>
 					      		</div>
