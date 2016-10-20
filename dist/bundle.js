@@ -65,7 +65,6 @@
 			var students = [new _student2.default('Bastien', "Lhuaire", 19, "images/bastien.jpg"), new _student2.default('Stan', 'Xiong', 17), new _student2.default('Joel', 'Alves', 22, "images/joel.jpg"), new _student2.default('Clement', "Teboul", 19)];
 
 			_student_list.student_list.init(students, _student_display.student_display);
-			_student_display.student_display.init();
 			popup_add_student();
 			popup_del_student();
 			console.log("Give me Five is initiated and  ready");
@@ -224,7 +223,6 @@
 	var student_display = {
 
 		div_display: $('#partie_display').children().detach(),
-		init: function init() {},
 		draw: function draw(type) {
 			var student = _student_list.student_list.get_selected(),
 			    $display = $("#partie_display");

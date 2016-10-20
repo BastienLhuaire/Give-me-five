@@ -3,9 +3,6 @@ import {student_list} from './student_list';
 let student_display = {
 
 	div_display:$('#partie_display').children().detach(),
-	init: function(){
-		
-	},
 	draw: function(type){
 		let student = student_list.get_selected(),
 			$display = $("#partie_display");

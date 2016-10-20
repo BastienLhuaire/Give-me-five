@@ -16,7 +16,6 @@ let give_me_five = {
 		];
 
 		student_list.init(students,student_display);
-		student_display.init();
 		popup_add_student();
 		popup_del_student();
 		console.log("Give me Five is initiated and  ready");
