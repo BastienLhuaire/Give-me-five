@@ -65,6 +65,7 @@
 			var students = [new _student2.default('Bastien', "Lhuaire", 19, "images/bastien.jpg"), new _student2.default('Stan', 'Xiong', 17), new _student2.default('Joel', 'Alves', 22, "images/joel.jpg"), new _student2.default('Clement', "Teboul", 19)];
 
 			_student_list.student_list.init(students, _student_display.student_display);
+			_student_display.student_display.init();
 			popup_add_student();
 			popup_del_student();
 			console.log("Give me Five is initiated and  ready");
@@ -117,10 +118,15 @@
 	function Student(firstname, lastname, age, photo_url) {
 		_classCallCheck(this, Student);
 
+		//partie draw infos
+		this.age = age || "non défini";
+		this.phone = "non défini";
+		this.email = "non défini";
+		//partie draw default
 		this.firstname = firstname || "John";
 		this.lastname = lastname || "Doe";
-		this.age = age || 0;
 		this.photo_url = photo_url || "images/profile_default.png";
+		//partie draw score
 		this.score = 0;
 		this.present_number = 0;
 		this.absent_number = 0;
@@ -218,8 +224,8 @@
 	var student_display = {
 
 		div_display: $('#partie_display').children().detach(),
-
-		draw: function draw() {
+		init: function init() {},
+		draw: function draw(type) {
 			var student = _student_list.student_list.get_selected(),
 			    $display = $("#partie_display");
 			$display.empty();
@@ -227,20 +233,37 @@
 				//  création de la représentation de la partie affichage
 				var div = this.div_display.clone();
 				$('#partie_display').append(div);
+				//gestion du clik info
+				$(".info_button").on("click", function () {
+					student_display.draw("info");
+				});
 				$("#partie_display .nom_titre").empty();
 				$("#partie_display .nom_titre").append(student.firstname + " " + student.lastname);
 				//changement de l'image
 				$(".image_profile").attr("src", student.photo_url);
 			}
-			// gestion des click
-			/*	
-	  	let self = this;
-	  	
-	  	$('#students').on('click', 'li', function(){
-	  
-	  		let index = $( "#students li" ).index( this );
-	  		self.select_student(self.students[index]);		
-	  	});*/
+			//partie display info
+			if (type == "info") {
+				var _student = _student_list.student_list.get_selected();
+				$("#partie_display tr").empty();
+				$("#partie_display .info_button").html('<');
+				$(".info_button").on("click", function () {
+					student_display.draw();
+				});
+
+				//rempli le tableau des infos
+				var c = 0;
+				for (var i in _student) {
+					//ferme le for pour les propriétées non affichées
+					if (i == "firstname") break;
+					c++;
+					if (c % 2 != 1) {
+						$("#partie_display tr.success").append("<td>" + i + " : " + _student[i] + "</td>");
+					} else {
+						$("#partie_display tr.active").append("<td>" + i + " : " + _student[i] + "</td>");
+					}
+				};
+			};
 		}
 	};
 	exports.student_display = student_display;
