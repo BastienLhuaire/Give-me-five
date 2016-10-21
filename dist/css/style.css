@@ -13,9 +13,6 @@ body{
 	overflow-x: hidden;
 	box-shadow: 2px 2px 2px 1px #1C1C1C;  
 }
-span{
-	border: 1px solid black;
-}
 li{
 	margin-bottom: 5px;
 	padding: 2px;
@@ -41,7 +38,7 @@ h1,h4{
 	margin-bottom: 10px;
 	color: black;
 }
-/*colors*/
+/***************************************colors***************************************/
 .bg_blue_principal{
 	background-color: #295e62;
 }
@@ -55,7 +52,7 @@ h1,h4{
 	background-color: #9E9E9E;
 }
 .bg_rouge{
-	background-color: #c9302c;
+	background-color: #d9534f;
 }
 .selected_student{
 	background-color: #928B8B;
@@ -69,12 +66,12 @@ h1,h4{
 	color:black;
 	border-color: white;
 }
-.btn_present:hover,.btn_present:active {
+.btn_present:hover,.btn_present:focus {
 	background-color: #5cb85c;
 }
-.btn_retard:hover,.btn_retard:active{
+.btn_retard:hover,.btn_retard:focus{
 	background-color: #f0ad4e;
 }
-.btn_absent:hover,.btn_absent:active{
+.btn_absent:hover,.btn_absent:focus{
 	background-color: #d9534f;
 }

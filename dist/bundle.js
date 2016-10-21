@@ -150,7 +150,7 @@
 	}
 	var student_list = {
 
-		students: [],
+		students: JSON.parse(localStorage.getItem("list_student")),
 		student_selected: null,
 		li_student: $('#students_ul').children('li').detach(),
 
@@ -165,8 +165,12 @@
 		},
 
 		init: function init(students, display_student) {
-			this.students = students;
+			//vérifie si le localstorage a changé la liste
+			if (students == []) {
+				this.students = students;
+			};
 			this.students.sort(tri);
+			localStorage.setItem("list_student", JSON.stringify(student_list.students));
 			//  création de la représentation de la liste
 
 			var $one = this.li_student;
@@ -182,6 +186,8 @@
 				$("#students_ul").append(li);
 				//changement du nom
 				$("#" + j + " .nom").append(student.firstname + " " + student.lastname);
+				//changement du score
+				$("#" + j + " .score_list").children("span").html(student.score);
 			}
 
 			// gestion des click
@@ -248,7 +254,7 @@
 				//changement de l'image
 				$(".image_profile").attr("src", student.photo_url);
 				//la gestion du score
-				(0, _score2.default)(_student_list.student_list.get_selected());
+				(0, _score2.default)(_student_list.student_list.get_selected(), _student_list.student_list);
 			}
 			//partie display info
 			if (type == "info") {
@@ -14699,17 +14705,22 @@
 		value: true
 	});
 	exports.default = init_score;
-	function init_score(student) {
+	function init_score(student, student_list) {
 		var $td = $(".score_tab td");
 
 		var _loop = function _loop(i) {
 			var td = $td[i];
 			var prop = $(td).attr("id");
+			//permet de changer les valeur avant d'appuyer sur un bouton
+			$(td).children("span").html(student[prop]);
+			calcul_score(student, score_tab, student_list);
+			//ajoute 1 a la propriété dans laquelle est le bouton
 			$(td).on("click", '.plus', function () {
 				student[prop]++;
 				$(td).children("span").html(student[prop]);
-				calcul_score(student, score_tab);
+				calcul_score(student, score_tab, student_list);
 			});
+			//enlève 1 a la propriété dans laquelle est le bouton (min 0)
 			$(td).on("click", '.moins', function () {
 				if (student[prop] > 0) {
 					student[prop]--;
@@ -14724,7 +14735,7 @@
 		};
 	};
 
-	function calcul_score(student, score_tab) {
+	function calcul_score(student, score_tab, student_list) {
 		var id = student.id;
 		student.score = 0;
 		for (var pt in score_tab) {
@@ -14732,6 +14743,7 @@
 		};
 		$(".score").children("span").html(student.score);
 		$("#" + id + " .score_list").children("span").html(student.score);
+		localStorage.setItem("list_student", JSON.stringify(student_list.students));
 	}
 
 	var score_tab = {

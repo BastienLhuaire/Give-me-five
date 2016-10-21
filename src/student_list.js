@@ -4,7 +4,7 @@ return (a.lastname > b.lastname)?1:-1;
 }
 let student_list = {
 
-	students: [],
+	students: JSON.parse(localStorage.getItem("list_student")),
 	student_selected: null,
 	li_student:$('#students_ul').children('li').detach(),
 
@@ -21,8 +21,12 @@ let student_list = {
 	},
 
 	init: function( students , display_student){
-		this.students = students;
+		//vérifie si le localstorage a changé la liste
+		if (students==[]) {
+			this.students = students;
+		};
 		this.students.sort(tri);
+		localStorage.setItem("list_student",JSON.stringify(student_list.students));
 		//  création de la représentation de la liste
 		
 		let $one = this.li_student;
@@ -38,6 +42,8 @@ let student_list = {
 			$("#students_ul").append(li);
 			//changement du nom
 			$("#"+j+" .nom").append(student.firstname+" "+student.lastname);
+			//changement du score
+			$("#"+j+" .score_list").children("span").html(student.score);
 		}
 
 		// gestion des click

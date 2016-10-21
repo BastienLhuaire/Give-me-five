@@ -20,7 +20,7 @@ let student_display = {
 			//changement de l'image
 			$(".image_profile").attr("src",student.photo_url);
 			//la gestion du score
-			init_score(student_list.get_selected());
+			init_score(student_list.get_selected(),student_list);
 		}
 		//partie display info
 		if (type=="info") {
