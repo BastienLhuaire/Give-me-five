@@ -127,10 +127,11 @@
 		this.photo_url = photo_url || "images/profile_default.png";
 		//partie draw score
 		this.score = 0;
-		this.present_number = 0;
-		this.absent_number = 0;
-		this.retard_number = 0;
-		this.participation_number = 0;
+		this.presence = 0;
+		this.absence = 0;
+		this.retard = 0;
+		this.participation = 0;
+		this.passage = 0;
 	};
 
 	exports.default = Student;
@@ -220,9 +221,16 @@
 
 	var _student_list = __webpack_require__(2);
 
+	var _score = __webpack_require__(111);
+
+	var _score2 = _interopRequireDefault(_score);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 	var student_display = {
 
 		div_display: $('#partie_display').children().detach(),
+
 		draw: function draw(type) {
 			var student = _student_list.student_list.get_selected(),
 			    $display = $("#partie_display");
@@ -239,6 +247,8 @@
 				$("#partie_display .nom_titre").append(student.firstname + " " + student.lastname);
 				//changement de l'image
 				$(".image_profile").attr("src", student.photo_url);
+				//la gestion du score
+				(0, _score2.default)(_student_list.student_list.get_selected());
 			}
 			//partie display info
 			if (type == "info") {
@@ -14678,6 +14688,59 @@
 	    return zh_tw;
 
 	}));
+
+/***/ },
+/* 111 */
+/***/ function(module, exports) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	exports.default = init_score;
+	function init_score(student) {
+		var $td = $(".score_tab td");
+
+		var _loop = function _loop(i) {
+			var td = $td[i];
+			var prop = $(td).attr("id");
+			$(td).on("click", '.plus', function () {
+				student[prop]++;
+				$(td).children("span").html(student[prop]);
+				calcul_score(student, score_tab);
+			});
+			$(td).on("click", '.moins', function () {
+				if (student[prop] > 0) {
+					student[prop]--;
+					$(td).children("span").html(student[prop]);
+					calcul_score(student, score_tab);
+				};
+			});
+		};
+
+		for (var i = 0; i < $td.length; i++) {
+			_loop(i);
+		};
+	};
+
+	function calcul_score(student, score_tab) {
+		var id = student.id;
+		student.score = 0;
+		for (var pt in score_tab) {
+			student.score += score_tab[pt] * student[pt];
+		};
+		$(".score").children("span").html(student.score);
+		$("#" + id + " .score_list").children("span").html(student.score);
+	}
+
+	var score_tab = {
+		presence: 10,
+		absence: -10,
+		retard: -2,
+		participation: 2,
+		passage: 4
+	};
 
 /***/ }
 /******/ ]);

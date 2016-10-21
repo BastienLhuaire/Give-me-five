@@ -69,3 +69,12 @@ h1,h4{
 	color:black;
 	border-color: white;
 }
+.btn_present:hover,.btn_present:active {
+	background-color: #5cb85c;
+}
+.btn_retard:hover,.btn_retard:active{
+	background-color: #f0ad4e;
+}
+.btn_absent:hover,.btn_absent:active{
+	background-color: #d9534f;
+}

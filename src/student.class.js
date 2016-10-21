@@ -17,9 +17,10 @@ export default class Student{
 	    this.photo_url      	   = photo_url || "images/profile_default.png" ;
 	    //partie draw score
 		this.score          	   = 0;
-		this.present_number 	   = 0;
-		this.absent_number  	   = 0;
-		this.retard_number  	   = 0;
-		this.participation_number  = 0;
+		this.presence 	   		   = 0;
+		this.absence  	  		   = 0;
+		this.retard  	   		   = 0;
+		this.participation		   = 0;
+		this.passage	     	   = 0;
 	}
 }

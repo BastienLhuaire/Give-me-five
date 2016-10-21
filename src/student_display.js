@@ -1,8 +1,10 @@
 import {student_list} from './student_list';
+import init_score from './score';
 
 let student_display = {
 
 	div_display:$('#partie_display').children().detach(),
+
 	draw: function(type){
 		let student = student_list.get_selected(),
 			$display = $("#partie_display");
@@ -17,6 +19,8 @@ let student_display = {
 			$("#partie_display .nom_titre").append(student.firstname+" "+student.lastname);
 			//changement de l'image
 			$(".image_profile").attr("src",student.photo_url);
+			//la gestion du score
+			init_score(student_list.get_selected());
 		}
 		//partie display info
 		if (type=="info") {
@@ -27,7 +31,7 @@ let student_display = {
 
 			//rempli le tableau des infos
 			let c = 0;
-			for (var i in student) {
+			for (let i in student) {
 				//ferme le for pour les propriétées non affichées
 				if (i=="firstname") break;
 				c++;

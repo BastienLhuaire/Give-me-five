@@ -27,13 +27,13 @@
 								</div>
 								<div class="col-md-4">
 									<div class="btn-group" role="group">
-										<button class="btn btn-success">P</button>
-										<button class="btn btn-warning">R</button>
-										<button class="btn btn-danger">A</button>
+										<button class="btn btn_present">P</button>
+										<button class="btn btn_retard">R</button>
+										<button class="btn btn_absent">A</button>
 									</div>
 								</div>
 								<div class="col-md-2">
-									<p class="score">Score:0</p>
+									<p class="score_list">Score:<span>0</span></p>
 								</div>
 								<div class="col-md-2">
 									<button type="button" class="btn-danger del_student"  data-toggle="modal" data-target="#popup_delete">X</button>
@@ -114,24 +114,24 @@
 					</div>
 					<div class="row">
 						<div class="col-md-10 col-md-offset-1">
-							<table class="table table-bordered">
+							<table class="table table-bordered score_tab">
 								<tbody>
 								<tr class="active">
-									<td>Présence : 0 
+									<td id="presence">Présence : <span>0</span>
 										</br><button class="plus">+</button><button class="moins">-</button>
 									</td>
-									<td>Absence : 0 
+									<td id="absence">Absence : <span>0</span>
 										</br><button class="plus">+</button><button class="moins">-</button>
 									</td>
-									<td>Retard : 0 
+									<td id="retard">Retard : <span>0</span> 
 										</br><button class="plus">+</button><button class="moins">-</button>
 									</td>
 								</tr>
 								<tr class="success">
-									<td>Participation : 0 
+									<td id="participation">Participation : <span>0</span> 
 										</br><button class="plus">+</button><button class="moins">-</button>
 									</td>
-									<td>Passage au tableau : 0 
+									<td id="passage">Passage au tableau : <span>0</span> 
 										</br><button class="plus">+</button><button class="moins">-</button>
 									</td>
 									<td></td>
@@ -147,18 +147,14 @@
 					</div>
 					<div class="row">
 						<div class="col-md-8 col-md-offset-2">
-							<div class="barre_score bg-primary"><p class="text-center">Score : 0</div>
+							<div class="barre_score bg-primary"><p class="text-center score">Score : <span>0</span></div>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 		<!-- Fin Row principale -->
-		<div class="row">
-			<div class="col-md-12">
-				<footer></footer>
-			</div>
-		</div>
+
 	</div>
 	<script src="jquery.min.js"></script>
 	<script src="bootstrap.min.js"></script>
