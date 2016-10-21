@@ -15,6 +15,7 @@ export default class Student{
 		this.firstname  		   = firstname || "John";
 		this.lastname 			   = lastname || "Doe";
 	    this.photo_url      	   = photo_url || "images/profile_default.png" ;
+	    this.state 				   = "absent";
 	    //partie draw score
 		this.score          	   = 0;
 		this.presence 	   		   = 0;

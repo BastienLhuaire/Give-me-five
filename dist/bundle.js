@@ -125,6 +125,7 @@
 		this.firstname = firstname || "John";
 		this.lastname = lastname || "Doe";
 		this.photo_url = photo_url || "images/profile_default.png";
+		this.state = "absent";
 		//partie draw score
 		this.score = 0;
 		this.presence = 0;
@@ -188,6 +189,7 @@
 				$("#" + j + " .nom").append(student.firstname + " " + student.lastname);
 				//changement du score
 				$("#" + j + " .score_list").children("span").html(student.score);
+				//changement etats
 			}
 
 			// gestion des click

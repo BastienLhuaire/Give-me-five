@@ -44,6 +44,7 @@ let student_list = {
 			$("#"+j+" .nom").append(student.firstname+" "+student.lastname);
 			//changement du score
 			$("#"+j+" .score_list").children("span").html(student.score);
+			//changement etats
 		}
 
 		// gestion des click
@@ -56,7 +57,6 @@ let student_list = {
 			self.select_student(self.students[index]);	
 			display_student.draw();
 		});
-
 
 		console.log('Liste : students ready');
 	},

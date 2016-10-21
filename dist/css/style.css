@@ -66,12 +66,12 @@ h1,h4{
 	color:black;
 	border-color: white;
 }
-.btn_present:hover,.btn_present:focus {
+.btn_present:hover{
 	background-color: #5cb85c;
 }
-.btn_retard:hover,.btn_retard:focus{
+.btn_retard:hover{
 	background-color: #f0ad4e;
 }
-.btn_absent:hover,.btn_absent:focus{
+.btn_absent:hover{
 	background-color: #d9534f;
 }
